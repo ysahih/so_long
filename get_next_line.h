@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:34:22 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/14 17:17:30 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/15 17:13:23 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@
 # include <stdio.h>
 # include <limits.h>
 # include <string.h>
+
+typedef struct list
+{
+	void *content;
+	struct list* next;
+} list;
+    
+typedef struct node
+{
+	int x;
+    int y;
+	struct node* next;
+} node;
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *s);

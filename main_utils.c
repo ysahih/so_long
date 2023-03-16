@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:36:02 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/15 20:58:16 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/16 14:23:23 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,53 +98,52 @@ int	check_newline(char *line)
 	return (0);
 }
 
-node	*ft_lstlast(node *lst)
-{
-	if (!lst)
-		return (0);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
+// node	*ft_lstlast(node *lst)
+// {
+// 	if (!lst)
+// 		return (0);
+// 	while (lst->next)
+// 		lst = lst->next;
+// 	return (lst);
+// }
 
-void	ft_lstadd_back(node **lst, node *new)
-{
-	node	*tmp;
-	if (!lst)
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	tmp = ft_lstlast(*lst);
-	tmp->next = new;
-}
+// void	ft_lstadd_back(node **lst, node *new)
+// {
+// 	node	*tmp;
+// 	if (!lst)
+// 		return ;
+// 	if (*lst == NULL)
+// 	{
+// 		*lst = new;
+// 		return ;
+// 	}
+// 	tmp = ft_lstlast(*lst);
+// 	tmp->next = new;
+// }
 
-void enqueue(node **lst, int x, int y)
-{
-	node *list = malloc(sizeof(node));
-	if(!list)
-		return ; 
-	list->x = x;
-	list->y = y;
-	list->next  = 0x0;
-	ft_lstadd_back(lst,list);
-}
-void dequeue(node *lst)
-{
-	node *tmp = lst;
-	if (lst == NULL)
-		return ;
-	else 
-		lst = lst->next;
-	free(tmp);
-}
+// void enqueue(node **lst, int x, int y)
+// {
+// 	node *list = malloc(sizeof(node));
+// 	if(!list)
+// 		return ; 
+// 	list->x = x;
+// 	list->y = y;
+// 	list->next  = 0x0;
+// 	ft_lstadd_back(lst,list);
+// }
+// void dequeue(node *lst)
+// {
+// 	node *tmp = lst;
+// 	if (lst == NULL)
+// 		return ;
+// 	else 
+// 		lst = lst->next;
+// 	free(tmp);
+// }
 
- int bfs(int x, int y, char **map)
- {
-	//queue
-	//add start
-
-	//loop 
- }
+// int bfs(int x, int y, char **map)
+//  {
+	
+// 	node *queue = malloc(sizeof(node));
+	
+//  }

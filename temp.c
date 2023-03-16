@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/15 14:29:51 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/16 15:12:37 by ysahih           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include"get_next_line.h"
 
 char	*get_line(char *line)
@@ -108,7 +96,7 @@ char	*get_next_line(int fd)
 }
 
 	// puts("ch9m");
-bool map_checker(char **s)
+bool map_requesties(char **s)
 {
 	int i = 0;
 	int j;
@@ -136,10 +124,9 @@ bool map_checker(char **s)
 }
 bool map_valid(char **line, int a)
 {	
-	int i;
-	int j;
+	int i, j = 0;
 	i = 0;
-	while (i < a)
+	while (i < a )
 	{
 		if (strlen(line[0]) != strlen(line[i + 1]))
 			return (false);
@@ -153,61 +140,90 @@ bool map_valid(char **line, int a)
 		i++;
 	}
 	i = 0;
-	while  (i < a)
+	while  (i <= a)
 	{
 		if (line[i][0] != '1')
 			return (false);
 		i++;
 	}
-	j = 0;
-	while (j < a)
+	i = 0;
+    j = strlen(line[0]) - 1;
+	while (i <= a)
 	{
-		if (line[j][a] != '1')
+		if (line[i][j] != '1')
 			return (false);
-		j++;
+		i++;
 	}
-	i = strlen(line[0]) - 1;
-	if (!(i > a))
+	if (j <= a)
 		return (false);
-	if (!map_checker(line))
+	if (!map_requesties(line))
 		return (false);
 	return (true);
 }
 
-int	main()
+int calculate_size(char *file)
 {
-	int	fd;
-	int c, r;
-	fd = open("maps/map.ber",O_RDONLY);
+	int	i;
+	int fd = open("maps/map.ber",O_RDONLY);
+
+	i = 0;
+	while((get_next_line(fd)) != NULL)
+		i++;
+	return (close(fd), i);
+}
+
+char** read_map(int *a)
+{
 	int i = 0;
+	int fd = open("maps/map.ber",O_RDONLY);
 	char **line = NULL;
-	line = malloc(200);
+	line = malloc(calculate_size("maps/map.ber") * sizeof(char *));
 	if (!line)
-		return (0);
+		return 0;
 	while((line[i] = get_next_line(fd)) != NULL)
 		i++;
+	*a = i - 1;
+	return(line);
+}
+
+int	main()
+{
+	int i = 0;
+	int c, r;
+	bool flag = false;
+	// fd = open("maps/map.ber",O_RDONLY);
+	// int i = 0;
+	char **line = read_map(&i);
+
+    // for (int i = 0; line[i]; i++)
+    //     printf("%s", line[i]);
+	// printf("%d", i);
+	// r = i;
+	// c = strlen(line[0]);
 	
-	r = i;
-	c = strlen(line[0]);
-	int a = 0, b = 0;;
-	while (line[a])
-	{
-		b = 0;
-		while(line[a][b])
-		{
-			if (line[a][b] == 'P'){
-				break;
-		}
-			b++;
-		}
-		a++;
-	}
-		printf("%d, %d", a, b);
+	// int a = 0, b = 0;;
+	// while (line[a])
+	// {
+	// 	b = 0;
+	// 	while(line[a][b])
+	// 	{
+	// 		if (line[a][b] == 'P'){
+	// 			flag = true;
+	// 			break;
+	// 		}
+	// 		b++;
+	// 	}
+	// 	if (flag)
+	// 		break;
+	// 	a++;
+	// }
+	
+	
 	
 
-	i--;
+
 	
-	if (!map_valid(line, i))
+	if (map_valid(line, i) == 0)
 		printf("YOOO!!");
 	else 
 		puts("OK");

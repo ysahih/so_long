@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:34:22 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/15 17:13:23 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/16 12:09:20 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <stdio.h>
 # include <limits.h>
 # include <string.h>
+#include <stdbool.h>
+
 
 typedef struct list
 {

@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:34:22 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/16 12:09:20 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/16 20:16:29 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@
 #include <stdbool.h>
 
 
-typedef struct list
-{
-	void *content;
-	struct list* next;
-} list;
+// typedef struct list
+// {
+// 	void *content;
+// 	struct list* next;
+// } list;
     
 typedef struct node
 {
@@ -39,6 +39,18 @@ typedef struct node
 	struct node* next;
 } node;
 
+typedef struct point {
+	int x;
+	int y;
+}point;
+
+bool found_elmnt(char c);
+bool bfs(point p, char **map , int i);
+int count_items(char **s);
+void dequeue(node *lst);
+void	ft_lstadd_back(node **lst, node *new);
+node	*ft_lstlast(node *lst);
+void enqueue(node **lst, point p);
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);

@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:36:02 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/16 20:19:02 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/16 20:28:25 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ bool bfs(point p, char **map , int i)
 			if (found_elmnt(map[p.x - 1][p.y]))
 				a++;
 		}
-		if (p.x < i && map[p.x + 1][p.y] == 0 && visited[p.x + 1][p.y] == 0)
+		if (p.x < i && map[p.x + 1][p.y] != 1 && visited[p.x + 1][p.y] == 0)
 		{
 			point p1;
 			p1.x = p.x + 1;
@@ -205,7 +205,7 @@ bool bfs(point p, char **map , int i)
 			if (found_elmnt(map[p.x + 1][p.y]))
 				a++;
 		}	
-		if (p.y > 0 && map[p.x][p.y - 1] == 0 && visited[p.x][p.y - 1] == 0)
+		if (p.y > 0 && map[p.x][p.y - 1] != 1 && visited[p.x][p.y - 1] == 0)
 		{
 			point p1;
 			p1.x = p.x;
@@ -215,7 +215,7 @@ bool bfs(point p, char **map , int i)
 			if (found_elmnt(map[p.x][p.y - 1]))
 				a++;
 		}
-		if (p.y < strlen(map[0]) && map[p.x][p.y + 1] == 0 && visited[p.x][p.y + 1] == 0)
+		if (p.y < strlen(map[0]) && map[p.x][p.y + 1] != 1 && visited[p.x][p.y + 1] == 0)
 		{
 			point p1;
 			p1.x = p.x;

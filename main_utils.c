@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:36:02 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/17 13:31:31 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/17 17:53:32 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,10 +176,10 @@ bool found_elmnt(char c)
 }
 
 bool bfs(point p, char **map , int row, int col)
- {
+{
 
 	int goal = count_items(map);
-	// int ** visited = (int **) malloc(row * sizeof(int *));
+	// int ** visited = (int **) malloc(row * col *sizeof(int *));
 	// if (!visited)
 	// 	return (NULL);
 	// for (int i = 0; i < row; i++){
@@ -191,7 +191,7 @@ bool bfs(point p, char **map , int row, int col)
 	int visited[row][col];
 	memset(visited, 0 , row * col * sizeof(int));
 	
-	int a = 0;
+	int count = 0;
 	node *queue = NULL;
 	enqueue(&queue, p);
 	visited[p.x][p.y] = 1;
@@ -202,22 +202,26 @@ bool bfs(point p, char **map , int row, int col)
 		dequeue(&queue);
 		
 		if (found_elmnt(map[p.x][p.y]))
-			a++;
-		if (goal == a){
+			count++;
+		if (goal == count){
 			// puts("hh");
 			puts("path found");
 			return (true);
 		}
+		if (map[p.x][p.y] == 'E')
+			continue;
 		if (p.x > 0 && map[p.x - 1][p.y] != '1' && visited[p.x - 1][p.y] == 0)
 		{
+			// push(p.x - 1, p.y, map, queue);
 			point p1;
 			p1.x = p.x - 1;
 			p1.y = p.y;
 			enqueue(&queue, p1);
 			visited[p.x - 1][p.y] = 1;
 		}
-		if (p.x < row && map[p.x + 1][p.y] != '1' && visited[p.x + 1][p.y] == 0)
+		if (p.x < row && map[p.x + 1][p.y] != '1'  && visited[p.x + 1][p.y] == 0)
 		{
+			// push(p.x + 1, p.y, map, queue);
 			point p1;
 			p1.x = p.x + 1;
 			p1.y = p.y;
@@ -226,14 +230,16 @@ bool bfs(point p, char **map , int row, int col)
 		}	
 		if (p.y > 0 && map[p.x][p.y - 1] != '1' && visited[p.x][p.y - 1] == 0)
 		{
+			// push(p.x, p.y - 1, map, queue);
 			point p1;
 			p1.x = p.x;
 			p1.y = p.y - 1;
 			enqueue(&queue, p1);
 			visited[p.x][p.y - 1] = 1;
 		}
-		if (p.y < strlen(map[0]) && map[p.x][p.y + 1] != '1' && visited[p.x][p.y + 1] == 0)
+		if (p.y < strlen(map[0]) && map[p.x][p.y + 1] != '1'  && visited[p.x][p.y + 1] == 0)
 		{
+			// push(p.x, p.y + 1, map, queue);
 			point p1;
 			p1.x = p.x;
 			p1.y = p.y + 1;
@@ -241,8 +247,9 @@ bool bfs(point p, char **map , int row, int col)
 			visited[p.x][p.y + 1] = 1;
 		}
 	}
+	free(queue);
 	 		// puts("hehe");
-	printf("goal: %d, a: %d\n", goal, a);
+	printf("goal: %d, a: %d\n", goal, count);
 	puts("no path found");
 	return (false);
  }

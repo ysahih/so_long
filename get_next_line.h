@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:34:22 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/16 20:16:29 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/17 12:22:50 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ typedef struct point {
 }point;
 
 bool found_elmnt(char c);
-bool bfs(point p, char **map , int i);
+bool bfs(point p, char **map , int row, int col);
 int count_items(char **s);
-void dequeue(node *lst);
+void dequeue(node **lst);
 void	ft_lstadd_back(node **lst, node *new);
 node	*ft_lstlast(node *lst);
 void enqueue(node **lst, point p);

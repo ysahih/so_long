@@ -165,33 +165,38 @@ int calculate_size(char *file)
 {
 	int	i;
 	int fd = open("maps/map.ber",O_RDONLY);
-
+	if (fd == -1 )
+		exit (0);
 	i = 0;
 	while((get_next_line(fd)) != NULL)
 		i++;
-	return (close(fd), i);
+	close(fd);
+	return (i);
 }
 
 point find_player(char **map)
 {
-	int flag;
+	int flag = 0;
 	point p;
-	p.x = 0, p.y = 0;
-	while (map[p.y])
+	int x = 0;
+	int y = 0;
+	while (map[x])
 	{
-		p.x = 0;
-		while(map[p.y][p.x])
+		y = 0;
+		while(map[x][y])
 		{
-			if (map[p.y][p.x] == 'P'){
-				flag = true;
+			if (map[x][y] == 'P'){
+				flag = 1;
 				break;
 			}
-			p.x++;
+			y++;
 		}
 		if (flag)
 			break;
-		p.y++;
+		x++;
 	}
+	p.x = x;
+	p.y = y;
 	return p;
 }
 
@@ -200,11 +205,30 @@ char** read_map(int *a)
 	int i = 0;
 	int fd = open("maps/map.ber",O_RDONLY);
 	char **line = NULL;
-	line = malloc(calculate_size("maps/map.ber") * sizeof(char *));
-	if (!line)
+	int size = calculate_size("maps/map.ber");
+	line = malloc(size * sizeof(char *) + 1);
+	line[size] = NULL;
+	
+	// while(line[i])
+	// {
+	// 	printf("%s\n", line[i]);
+	// 	i++;
+	// }
+	if (!line){
 		return 0;
-	while((line[i] = get_next_line(fd)) != NULL)
+	}
+	while(true)
+	{
+		char* l = 0;
+		l = get_next_line(fd);
+
+		if (l == NULL)
+		{
+			break;
+		}
+		line[i] = l;
 		i++;
+	}
 	*a = i - 1;
 	return(line);
 }
@@ -212,25 +236,25 @@ char** read_map(int *a)
 int	main()
 {
 	int i = 0;
-	int c, r;
-	bool flag = false;
-	int g, h;
+	int c = 0, r = 0;
 	// fd = open("maps/map.ber",O_RDONLY);
 	// int i = 0;
 	char **line = read_map(&i);
 
     // for (int i = 0; line[i]; i++)
     //     printf("%s", line[i]);
-	// printf("%d", i);
 
 	r = i + 1;
 	c = strlen(line[0]);
+	// printf("%d, %d", r, c);
 	
 	point p = find_player(line);
 	// p.x = b;
 	// p.y = a;
-	if (bfs (p,line, r))
+	puts("before bfs");
+	if (bfs (p,line, r, c))
 		puts("OK");	
+	puts("after bfs");
 
 	// printf ( "%d " ,count_items(line));
 	

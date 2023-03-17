@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:36:02 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/16 20:28:25 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/17 13:31:31 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,14 @@ void enqueue(node **lst, point p)
 	list->next  = 0x0;
 	ft_lstadd_back(lst,list);
 }
-void dequeue(node *lst)
+void dequeue(node **lst)
 {
-	node *tmp = lst;
-	if (lst == NULL)
+	// puts("ch9m");
+	node *tmp = *lst;
+	if (*lst == NULL)
 		return ;
 	else 
-		lst = lst->next;
+		*lst = (*lst)->next;
 	free(tmp);
 }
 bool queueisempty(node *lst)
@@ -158,7 +159,7 @@ int count_items(char **s)
 		j = 0;
 		while (s[i][j])
 		{
-			if  ((s[i][j] == 'P') || (s[i][j] == 'E') || (s[i][j] == 'C'))
+			if  ((s[i][j] == 'E') || (s[i][j] == 'C'))
 				a++;
 			j++;
 		}
@@ -169,64 +170,79 @@ int count_items(char **s)
 }
 bool found_elmnt(char c)
 {
-	if (c == 'C' || c == 'E' || c == 'P')
+	if (c == 'C' || c == 'E')
 		return (true);
 	return (false);
 }
 
-bool bfs(point p, char **map , int i)
+bool bfs(point p, char **map , int row, int col)
  {
+
 	int goal = count_items(map);
-	int visited[5][5] = {0};
-	int a;
+	// int ** visited = (int **) malloc(row * sizeof(int *));
+	// if (!visited)
+	// 	return (NULL);
+	// for (int i = 0; i < row; i++){
+	// 	visited[i] = malloc(col * sizeof(int));
+	// 	if (!visited[i])
+	// 		return (NULL);
+	// }
+
+	int visited[row][col];
+	memset(visited, 0 , row * col * sizeof(int));
+	
+	int a = 0;
 	node *queue = NULL;
 	enqueue(&queue, p);
 	visited[p.x][p.y] = 1;
 	while (!queueisempty(queue))
 	{
-		dequeue(queue);
-		if (p.x > 0 && map[p.x - 1][p.y] != 1 && visited[p.x - 1][p.y] == 0)
+		p.x = queue->x;
+		p.y = queue->y;
+		dequeue(&queue);
+		
+		if (found_elmnt(map[p.x][p.y]))
+			a++;
+		if (goal == a){
+			// puts("hh");
+			puts("path found");
+			return (true);
+		}
+		if (p.x > 0 && map[p.x - 1][p.y] != '1' && visited[p.x - 1][p.y] == 0)
 		{
 			point p1;
 			p1.x = p.x - 1;
 			p1.y = p.y;
 			enqueue(&queue, p1);
 			visited[p.x - 1][p.y] = 1;
-			if (found_elmnt(map[p.x - 1][p.y]))
-				a++;
 		}
-		if (p.x < i && map[p.x + 1][p.y] != 1 && visited[p.x + 1][p.y] == 0)
+		if (p.x < row && map[p.x + 1][p.y] != '1' && visited[p.x + 1][p.y] == 0)
 		{
 			point p1;
 			p1.x = p.x + 1;
 			p1.y = p.y;
 			enqueue(&queue, p1);
 			visited[p.x + 1][p.y] = 1;
-			if (found_elmnt(map[p.x + 1][p.y]))
-				a++;
 		}	
-		if (p.y > 0 && map[p.x][p.y - 1] != 1 && visited[p.x][p.y - 1] == 0)
+		if (p.y > 0 && map[p.x][p.y - 1] != '1' && visited[p.x][p.y - 1] == 0)
 		{
 			point p1;
 			p1.x = p.x;
 			p1.y = p.y - 1;
 			enqueue(&queue, p1);
 			visited[p.x][p.y - 1] = 1;
-			if (found_elmnt(map[p.x][p.y - 1]))
-				a++;
 		}
-		if (p.y < strlen(map[0]) && map[p.x][p.y + 1] != 1 && visited[p.x][p.y + 1] == 0)
+		if (p.y < strlen(map[0]) && map[p.x][p.y + 1] != '1' && visited[p.x][p.y + 1] == 0)
 		{
 			point p1;
 			p1.x = p.x;
 			p1.y = p.y + 1;
 			enqueue(&queue, p1);
 			visited[p.x][p.y + 1] = 1;
-			if (found_elmnt(map[p.x][p.y + 1]))
-				a++;
 		}
-		if (goal == a)
-			return (true);
 	}
+	 		// puts("hehe");
+	printf("goal: %d, a: %d\n", goal, a);
+	puts("no path found");
 	return (false);
  }

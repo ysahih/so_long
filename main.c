@@ -127,6 +127,18 @@ bool map_valid(char **line, int a)
 	int i, j = 0;
 	i = 0;
 	a--;
+	while(line[i])
+	{
+		j = 0;
+		while(line[i][j])
+		{
+			if (line[i][j] != '1' && line[i][j] != '0' && line[i][j] != 'E' && line[i][j] != 'P' && line[i][j] != 'C')
+				return (false);
+			j++;
+		}
+		i++;
+	}
+	i = 0;
 	while (i < a )
 	{
 		if (strlen(line[0]) != strlen(line[i + 1]))
@@ -159,6 +171,7 @@ bool map_valid(char **line, int a)
 		return (false);
 	if (!map_requesties(line))
 		return (false);
+	
 	return (true);
 }
 
@@ -177,28 +190,29 @@ int calculate_size(char *file)
 
 point find_player(char **map)
 {
-	int flag = 0;
+	// int flag = 0;
 	point p;
-	int x = 0;
-	int y = 0;
-	while (map[x])
+	p.x = 0;
+	p.y = 0;
+	while (map[p.x])
 	{
-		y = 0;
-		while(map[x][y])
+		p.y = 0;
+		while(map[p.x][p.y])
 		{
-			if (map[x][y] == 'P'){
-				flag = 1;
-				break;
+			if (map[p.x][p.y] == 'P'){
+				// flag = 1;
+				return p;
+				// break;
 			}
-			y++;
+			p.y++;
 		}
-		if (flag)
-			break;
-		x++;
+		// if (flag)
+		// 	break;
+		p.x++;
 	}
-	p.x = x;
-	p.y = y;
-	return p;
+	p.x = 0;
+	p.y = 0;
+	return(p);
 }
 
 char** read_map(int *a)
@@ -210,27 +224,16 @@ char** read_map(int *a)
 		return 0;
 	}
 	line[size] = NULL;
-	
 	int fd = open("maps/map.ber",O_RDONLY);
 	if (fd == -1)
 		return 0;
-	
-	
-	// while(line[i])
-	// {
-	// 	printf("%s\n", line[i]);
-	// 	i++;
-	// }
-	
 	while(true)
 	{
 		char* l = 0;
 		l = get_next_line(fd);
 
 		if (l == NULL)
-		{
 			break;
-		}
 		line[i] = l;
 		i++;
 	}
@@ -244,10 +247,17 @@ int	main()
 	int c = 0, r = 0;
 	char **map = read_map(&i);
 	point p = find_player(map);
+	if(p.x == 0 && p.y == 0)
+		puts("no player found");
+
 	r = i;
 	c = strlen(map[0]);
-	if (bfs (p,map, r, c) && map_valid(map, i) != 0)
-		puts("OK");	
-	 
-	
+
+	if (map_valid(map, i) != 0)
+		puts("maps valid check path");
+
+	// if (bfs (p,map, r, c))
+	// 	puts("path is valid");
+	else 
+		puts("no");
 }

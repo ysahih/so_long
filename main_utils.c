@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 14:36:02 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/17 17:53:32 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/18 15:49:59 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,7 @@ bool bfs(point p, char **map , int row, int col)
 			count++;
 		if (goal == count){
 			// puts("hh");
-			puts("path found");
+			// puts("path found");
 			return (true);
 		}
 		if (map[p.x][p.y] == 'E')

@@ -13,6 +13,12 @@
 # include <string.h>
 #include <stdbool.h>
 
+typedef struct s_count
+{
+	int p;
+	int e;
+	int c;
+}t_count;
 
 typedef struct s_point {
 	int x;

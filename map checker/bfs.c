@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "../so_long.h"
 
 void	push(int y, int x, t_queue **queue, char **visited)
 {

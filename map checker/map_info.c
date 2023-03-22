@@ -16,22 +16,22 @@ int calculate_size(char *file)
 t_point find_player(char **map)
 {
 	t_point   p;
-
+	// int flag = 0;
     p.y = 0;
 	while (map[p.y])
 	{
 		p.x = 0;
 		while(map[p.y][p.x])
 		{
-			if (map[p.y][p.x] == 'P')
-				return p;
+			if (map[p.y][p.x] == 'P'){
+				return (p);
+			}
 			p.x++;
 		}
+		// if (flag)
+		// 	break;
 		p.y++;
 	}
-	printf("%d, %d", p.y, p.x);
-	p.y = 0;
-	p.x = 0;
 	return(p);
 }
 

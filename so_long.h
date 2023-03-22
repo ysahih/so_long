@@ -12,7 +12,9 @@
 # include <limits.h>
 # include <string.h>
 #include <stdbool.h>
+#include <mlx.h>
 
+//DEFINE SIZE 64;
 typedef struct s_count
 {
 	int p;
@@ -31,8 +33,13 @@ typedef struct s_data
 	int row;
 	int col;
 	t_point p;
-
-
+	void *floor_img;
+	void *wall_img;
+	void *player_img;
+	void *exit_img;
+	void *cll_img;
+	void *mlx_ptr;
+	void *mlx_wind;
 }t_data;
 
 
@@ -44,7 +51,9 @@ typedef struct s_queue
 } t_queue;
 
 
-
+//rendring
+void	put_image_to_window(t_data *info, int row, int col);
+void	rendering(t_data *info);
 
 //map checker
 bool map_requesties(char **map);

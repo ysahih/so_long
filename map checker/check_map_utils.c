@@ -54,14 +54,14 @@ bool rectangular(char **map, int a)
 	int	i;
 	int	j;
 
-	j = 0;
+	i = 0;
+    j = ft_strlen(map[0]);
 	while (i < a )
 	{
-		if (ft_strlen(map[0]) != ft_strlen(map[i + 1]))
+		if (j != ft_strlen(map[i + 1]))
 			return (false);
 		i++;
 	}
-    j = ft_strlen(map[0]) - 1;
 	if (j <= a)
 		return (false);
 	return (true);

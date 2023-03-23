@@ -1,5 +1,26 @@
 #include "../so_long.h"
 
+int	count_c(char **map)
+{
+	int	i;
+	int	j;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == 'C')
+				count++;
+			j++;
+		}
+		i++;
+	}
+	return (count);
+} 
 bool map_requesties(char **map)
 {
 	int i;

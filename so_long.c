@@ -28,13 +28,23 @@ t_data*	collect_data(t_data *info, int row)
 		puts("maps not valid");
 		exit(0);
 	}
+	info->collectibles = count_c(info->map);
 	info->mlx_ptr = mlx_init();
 	info->row++;
 	info->mlx_wind = mlx_new_window(info->mlx_ptr, (info->col * 64), (info->row * 64), "so_long");
+	int i;
+	info->player_img =  mlx_xpm_file_to_image(info->mlx_ptr, "./images/koala11.xpm", &i, &i);
+	info->wall_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/wall_01.xpm", &i, &i);
+	info->cll_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/stra00.xpm", &i, &i);
+	info->exit_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/door_01.xpm", &i, &i);
+	info->floor_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/FLOOR.xpm", &i, &i);
 	return info;
 }
-
- 
+int cross_hook(t_data *info)
+{
+	mlx_destroy_window(info->mlx_ptr, info->mlx_wind);
+	exit(0);
+}
 int	main()
 {
 	int row;
@@ -44,13 +54,11 @@ int	main()
 		exit(0);
 	info->map = read_map(&row);
 	info = collect_data(info, row);
-	int i;
-	info->player_img =  mlx_xpm_file_to_image(info->mlx_ptr, "./images/koala11.xpm", &i, &i);
-	info->wall_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/wall_01.xpm", &i, &i);
-	info->cll_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/stra00.xpm", &i, &i);
-	info->exit_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/door_01.xpm", &i, &i);
-	info->floor_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/floor.xpm", &i, &i);
 
 	rendering(info);
+	// key_hook(info);
+	mlx_hook(info->mlx_wind, 2, 0, key_hook, info);
+	mlx_hook(info->mlx_wind, 17, 0, cross_hook, info);
+	
 	mlx_loop(info->mlx_ptr);
 }

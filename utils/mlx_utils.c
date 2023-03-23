@@ -1,4 +1,4 @@
-#include"so_long.h"
+#include"../so_long.h"
 
 void	put_image_to_window(t_data *info, int row, int col)
 {

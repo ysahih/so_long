@@ -33,7 +33,9 @@ typedef struct s_data
 	char **map;
 	int row;
 	int col;
+	int collectibles;
 	t_point p;
+	t_point new_pos;
 	void *floor_img;
 	void *wall_img;
 	void *player_img;
@@ -52,9 +54,22 @@ typedef struct s_queue
 } t_queue;
 
 
+//game play
+int		key_hook(int keycode, t_data *info);
+void	move_player(t_data *info);
+bool	move_right(t_data *info);
+bool	move_left(t_data *info);
+bool	move_up(t_data *info);
+bool	move_down(t_data *info);
+bool 	possible_tomove(t_data *info);
+
+
 //rendring
 void	put_image_to_window(t_data *info, int row, int col);
 void	rendering(t_data *info);
+
+
+
 
 //map checker
 bool map_requesties(char **map);
@@ -63,6 +78,7 @@ bool rectangular(char **map, int a);
 bool walls_serounded(char **map, int a);
 bool found_elmnt(char c);
 //map info
+int	count_c(char **map);
 int calculate_size(char *file);
 t_point find_player(char **map);
 char** read_map(int *a);

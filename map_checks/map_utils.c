@@ -58,18 +58,18 @@ bool rectangular(char **map, int a)
     j = ft_strlen(map[0]);
 	while (i < a )
 	{
-		if (j != ft_strlen(map[i + 1]))
+		if ((size_t)j != ft_strlen(map[i + 1]))
 			return (false);
 		i++;
 	}
-	if (j <= a)
+	if ((int)j <= a)
 		return (false);
 	return (true);
 }
 
 bool walls_serounded(char **map, int a)
 {
-	int	i;
+	size_t	i;
 	int	j;
 
 	i = 0;
@@ -81,7 +81,7 @@ bool walls_serounded(char **map, int a)
 	}
 	i = 0;
     j = ft_strlen(map[0]) - 1;
-	while  (i <= a)
+	while  ((int)i <= a)
 	{
 		if (map[i][0] != '1' && map[i][j] != '1')
 			return (false);

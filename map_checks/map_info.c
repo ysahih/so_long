@@ -3,7 +3,7 @@
 int calculate_size(char *file)
 {
 	int	i;
-	int fd = open("maps/map.ber",O_RDONLY);
+	int fd = open(file,O_RDONLY);
 	if (fd == -1 )
 		return (0);
 	i = 0;

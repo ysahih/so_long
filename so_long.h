@@ -14,7 +14,8 @@
 #include <stdbool.h>
 #include <mlx.h>
 
-//DEFINE SIZE 64;
+#define SIZE 64
+
 typedef struct s_count
 {
 	int p;

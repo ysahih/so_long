@@ -1,96 +1,77 @@
-#include"../so_long.h"
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <stdio.h>
+#include "so_long.h"
 
-char	*get_line(char *map)
+char    *join(char *s, char c)
 {
-	int		i;
-	char	*str;
-
-	i = 0;
-	while (map[i] != '\n')
-		i++;
-	str = malloc(i + 2);
-	i = 0;
-	while (map[i] != '\n')
-	{
-		str[i] = map[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+    char *ret;
+    if (!s){
+        s = malloc(2);
+        if (!s)
+            return 0;
+        if (c == '\n'){
+            puts("invalid map");
+            // return 0;
+            free(s);
+            exit (0);
+        }
+        *s = c;
+        s[1] = 0;
+        return s;
+    }
+    int i = 0;
+    for (; s[i]; i++){
+        ;
+    }
+    ret  = malloc(i + 2);
+    i = 0;
+    for (; s[i]; i++)
+        ret[i] = s[i];
+    if (c == '\n'){
+        ret[i] = 0;
+        free(s);
+        return ret;
+    }
+    else { 
+        ret[i++] = c;
+        ret[i] = 0;
+    }
+    free(s);
+    return ret;
 }
-
-int	get_main(char **buff, char **str)
+char *gnl(int fd)
 {
-	char	*s;
+    char r;
+    int ret;
+    char *buff = 0;
+    static char last_char = 0;
 
-	if (check_newline(*buff))
-	{
-		*str = get_line(*buff);
-		s = after_newline(*buff);
-		free (*buff);
-		*buff = s;
-		return (1);
-	}
-	else
-	{
-		*str = *buff;
-		*buff = NULL;
-		return (0);
-	}
-}
+    ret = 1;
 
-int	ft_main(char **line, char **str, char **buff)
-{
-	char	*s1;
-	char	*s2;
-
-	if (check_newline(*line))
-	{
-		s1 = get_line(*line);
-		if (*str == NULL)
-			*str = s1;
-		else
-		{
-			s2 = ft_strjoin(*str, s1);
-			free(*str);
-			free(s1);
-			*str = s2;
-		}
-		*buff = after_newline(*line);
-		free (*line);
-		return (1);
-	}
-	s1 = ft_strjoin(*str, *line);
-	free(*str);
-	*str = s1;
-	return (0);
-}
-
-char	*get_next_line(int fd)
-{
-	static char	*buff;
-	char		*str;
-	char		*line;
-	int			i;
-
-	str = NULL;
-	if (BUFFER_SIZE <= 0)
-		return (0);
-	if (buff)
-		if (get_main(&buff, &str))
-			return (str);
-	line = (char *)malloc (BUFFER_SIZE + 1);
-	if (!line)
-		return (0);
-	*line = 0;
-	i = read(fd, line, BUFFER_SIZE);
-	while (i > 0)
-	{
-		line[i] = 0;
-		if (ft_main(&line, &str, &buff))
-			return (str);
-		i = read(fd, line, BUFFER_SIZE);
-	}
-	free(line);
-	return (str);
+    while (1)
+    {
+        ret  = read(fd, &r, 1);
+        if (ret == -1)
+            return 0;
+        else if (ret == 0){
+            if (last_char == '\n')
+            {
+            printf("error: empty line\n");
+                exit(0);
+            }
+            break;
+        }
+        buff = join(buff, r);
+        last_char  = r;
+        if (r == '\n'){
+            break;
+        }
+    }
+    if (!buff || *buff == '\0'){
+        free(buff);
+        return 0;
+    }
+    return buff;
 }

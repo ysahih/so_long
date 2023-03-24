@@ -53,6 +53,13 @@ int	main()
 	if (!info)
 		exit(0);
 	info->map = read_map(&row);
+
+	// for (int i  = 0; info->map[i]; i++){
+	// 	for (int j = 0; info->map[i][j]; j++){
+	// 		printf("|%c|",info->map[i][j]);
+	// 	}
+	// 	puts("");
+	// }
 	info = collect_data(info, row);
 
 	rendering(info);

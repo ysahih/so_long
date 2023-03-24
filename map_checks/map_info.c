@@ -50,9 +50,12 @@ char** read_map(int *a)
 	while(true)
 	{
 		char* l = 0;
-		l = get_next_line(fd);
+		l = gnl(fd);
 		if (l == NULL)
 			break;
+		// printf("%d  %c\n", l[0], l[0]);
+		// if (l[0] == '\n' || l[0] == 0)
+			// return (NULL);
 		map[i] = l;
 		i++;
 	}
@@ -71,6 +74,8 @@ int count_items(char **s)
 		{
 			if  ((s[i][j] == 'E') || (s[i][j] == 'C'))
 				count++;
+			if (s[i][j] == '\n')
+				return(0);
 			j++;
 		}
 		i++;

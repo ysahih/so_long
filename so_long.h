@@ -93,6 +93,9 @@ void	ft_lstadd_back(t_queue **lst, t_queue *new);
 t_queue	*ft_lstlast(t_queue *lst);
 
 //gnl
+char *gnl(int fd);
+char *join(char *s, char c);
+
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *s);
 char	*ft_strjoin(char *s1, char *s2);

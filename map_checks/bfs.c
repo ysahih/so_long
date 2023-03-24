@@ -30,6 +30,8 @@ char **get_visited(int row, int col)
 bool bfs(t_point p, char **map , int row, int col)
 {
 	int goal = count_items(map);
+	if (!goal)
+		return false;
 	int count = 0;
 	char **visited = get_visited(row, col);
 	t_queue *queue = NULL;

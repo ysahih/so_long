@@ -38,6 +38,10 @@ t_data*	collect_data(t_data *info, int row)
 	info->cll_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/stra00.xpm", &i, &i);
 	info->exit_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/door_01.xpm", &i, &i);
 	info->floor_img = mlx_xpm_file_to_image(info->mlx_ptr, "./images/FLOOR.xpm", &i, &i);
+	if (!info->player_img || !info->wall_img || !info->cll_img || !info->exit_img || !info->floor_img){
+		write(1, "No Images Found\n", 16);
+		exit(0);
+	}
 	return info;
 }
 int cross_hook(t_data *info)

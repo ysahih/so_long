@@ -83,7 +83,7 @@ bool rectangular(char **map, int a)
 			return (false);
 		i++;
 	}
-	if ((int)j <= a)
+	if ((int)j - 1 == a)
 		return (false);
 	return (true);
 }

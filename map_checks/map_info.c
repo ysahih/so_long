@@ -7,7 +7,7 @@ int calculate_size(char *file)
 	if (fd == -1 )
 		return (0);
 	i = 0;
-	while((get_next_line(fd)) != NULL)
+	while((gnl(fd)) != NULL)
 		i++;
 	close(fd);
 	return (i);

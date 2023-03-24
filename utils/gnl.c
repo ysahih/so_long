@@ -2,7 +2,17 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <stdio.h>
-#include "so_long.h"
+#include "../so_long.h"
+
+size_t ft_strlen(char *s)
+{
+    int i;
+
+    i = 0;
+    while(s[i])
+        i++;
+    return (i);
+}
 
 char    *join(char *s, char c)
 {

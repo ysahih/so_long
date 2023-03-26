@@ -1,10 +1,6 @@
 #ifndef SO_LONG_H 
 # define SO_LONG_H
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
-# endif
-
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
@@ -81,7 +77,7 @@ bool found_elmnt(char c);
 int	count_c(char **map);
 int calculate_size(char *file);
 t_point find_player(char **map);
-char** read_map(int *a);
+char** read_map(int *row);
 int count_items(char **s);
 
 //path finding 

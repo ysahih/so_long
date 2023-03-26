@@ -21,7 +21,7 @@ int	count_c(char **map)
 	}
 	return (count);
 } 
-bool map_requesties(char **map)
+bool	map_requesties(char **map)
 {
 	int i;
 	int j;
@@ -53,9 +53,9 @@ bool map_requesties(char **map)
 	return (true);
 }
 
-bool components(char **map)
+bool	components(char **map)
 {
-	int i = 0, j = 0;
+	int	i = 0, j = 0;
 	while(map[i])
 	{
 		j = 0;

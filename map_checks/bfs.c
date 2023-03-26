@@ -10,33 +10,44 @@ void	push(int y, int x, t_queue **queue, char **visited)
 	visited[y][x] = 1;
 }
 
-char **get_visited(int row, int col)
+char	**get_visited(int row, int col)
 {
-	
-	char **visited = malloc(sizeof(char *) * row);
+	int	i;
+	int	j;
+	char	**visited;
+
+	visited = (char **)malloc(sizeof(char *) * row);
 	if (!visited)
-		return false;
-	for (int i = 0; i < row; i++){
-		visited[i] = (char *)malloc(col * sizeof(char));
-	}
-	for (int i = 0 ;i < row;++i) {
-		for (int j = 0;j < col;++j) {
-			visited[i][j] = 0;
-		}
+		return (false);
+	i = 0;
+	while(i < row)
+		visited[i++] = (char *)malloc(col * sizeof(char));
+	i = 0;
+	while (i < row)
+	{
+		j = 0;
+		while (j < col)
+			visited[i][j++] = 0;
+		i++;
 	}
 	return (visited);
 }
 
-bool bfs(t_point p, char **map , int row, int col)
+bool	bfs(t_point p, char **map , int row, int col)
 {
-	int goal = count_items(map);
+	int		goal;
+	int		count;
+	char	**visited;
+	t_queue	*queue;
+
+	row++;
+	count = 0;
+	goal = count_items(map);
 	if (!goal)
 		return false;
-	int count = 0;
-	char **visited = get_visited(row, col);
-	t_queue *queue = NULL;
+	visited = get_visited(row, col);
+	queue = NULL;
 	enqueue(&queue, p);
-	
 	visited[p.y][p.x] = 1;
 	while (!queueisempty(queue))
 	{
@@ -59,6 +70,6 @@ bool bfs(t_point p, char **map , int row, int col)
 			push(p.y, p.x + 1, &queue, visited);
 	}
 	free(queue);
-	puts("no path found");
+	write(1, "Invalid Path Leads to : ", 25);
 	return (false);
  }

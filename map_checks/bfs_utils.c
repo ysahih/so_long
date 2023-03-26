@@ -12,6 +12,7 @@ t_queue	*ft_lstlast(t_queue *lst)
 void	ft_lstadd_back(t_queue **lst, t_queue *new)
 {
 	t_queue	*tmp;
+
 	if (!lst)
 		return ;
 	if (*lst == NULL)
@@ -23,7 +24,7 @@ void	ft_lstadd_back(t_queue **lst, t_queue *new)
 	tmp->next = new;
 }
 
-void enqueue(t_queue **lst, t_point p)
+void	enqueue(t_queue **lst, t_point p)
 {
 	t_queue *list = malloc(sizeof(t_queue));
 	if(!list)
@@ -33,7 +34,8 @@ void enqueue(t_queue **lst, t_point p)
 	list->next  = 0x0;
 	ft_lstadd_back(lst,list);
 }
-void dequeue(t_queue **lst)
+
+void	dequeue(t_queue **lst)
 {
 	t_queue *tmp = *lst;
 	if (*lst == NULL)
@@ -42,7 +44,8 @@ void dequeue(t_queue **lst)
 		*lst = (*lst)->next;
 	free(tmp);
 }
-bool queueisempty(t_queue *lst)
+
+bool	queueisempty(t_queue *lst)
 {
 	if (lst == NULL)
 		return (true);

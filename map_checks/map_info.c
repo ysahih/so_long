@@ -1,9 +1,11 @@
 #include "../so_long.h"
 
-int calculate_size(char *file)
+int	calculate_size(char *file)
 {
 	int	i;
-	int fd = open(file,O_RDONLY);
+	int	fd;
+
+	fd = open(file,O_RDONLY);
 	if (fd == -1 )
 		return (0);
 	i = 0;
@@ -13,11 +15,10 @@ int calculate_size(char *file)
 	return (i);
 }
 
-t_point find_player(char **map)
+t_point	find_player(char **map)
 {
-	t_point   p;
-	// int flag = 0;
-    p.y = 0;
+	t_point	p;
+	p.y = 0;
 	while (map[p.y])
 	{
 		p.x = 0;
@@ -28,45 +29,52 @@ t_point find_player(char **map)
 			}
 			p.x++;
 		}
-		// if (flag)
-		// 	break;
 		p.y++;
 	}
 	return(p);
 }
 
-char** read_map(int *a)
+char	**read_map(int *row)
 {
-	int i = 0;
-	int size = calculate_size("maps/map.ber");
-	char **map = malloc(size * sizeof(char *) + 1);
-	if (!map){
-		return 0;
+	int	i;
+	int	size;
+	int	fd;
+
+	i = 0;
+	size = calculate_size("maps/map.ber");
+	if (!size)
+	{
+		write(1, "Invalid Map\n", 12);
+		exit(0);
 	}
+	char **map = malloc(size * sizeof(char *) + 1);
+	if (!map)
+		return (0);
 	map[size] = NULL;
-	int fd = open("maps/map.ber",O_RDONLY);
-	if (fd == -1)
-		return 0;
+	fd = open("maps/map.ber",O_RDONLY);
+	if (fd == -1 )
+		return (0);
 	while(true)
 	{
 		char* l = 0;
 		l = gnl(fd);
 		if (l == NULL)
 			break;
-		// printf("%d  %c\n", l[0], l[0]);
-		// if (l[0] == '\n' || l[0] == 0)
-			// return (NULL);
 		map[i] = l;
 		i++;
 	}
-	*a = i;
+	*row = i;
 	return(map);
 }
-int count_items(char **s)
+
+int	count_items(char **s)
 {
-	int i = 0;
-	int j;
-	int count = 0;
+	int	i;
+	int	j;
+	int	count;
+	
+	i = 0;
+	count = 0;
 	while (s[i])
 	{
 		j = 0;
@@ -83,7 +91,7 @@ int count_items(char **s)
 	return (count);
 }
 
-bool found_elmnt(char c)
+bool	found_elmnt(char c)
 {
 	if (c == 'C' || c == 'E')
 		return (true);

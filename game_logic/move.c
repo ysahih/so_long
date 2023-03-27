@@ -34,9 +34,15 @@ bool	move_left(t_data *info)
 
 void	move_player(t_data *info)
 {
+	static int	i = 0;
+
 	info->map[info->p.y][info->p.x] = '0';
 	info->map[info->new_pos.y][info->new_pos.x] = 'P';
 	info->p.y = info->new_pos.y;
 	info->p.x= info->new_pos.x;
+	i++;
+	write(1, "number of movement : ",21);
+	ft_putnbr(i);
+	write(1, "\n", 1);
 	rendering(info);
 }

@@ -1,5 +1,39 @@
 #include "../so_long.h"
 
+void ft_free(char **s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+		free(s[i++]);
+	free(s);
+}
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putnbr(int n)
+{
+	long	nb;
+
+	nb = n;
+	if (nb < 0)
+	{
+		write (1, "-", 1);
+		nb = -nb;
+	}
+	if (nb < 10)
+		ft_putchar(nb + 48);
+	else
+	{
+		ft_putnbr(nb / 10);
+		ft_putchar(nb % 10 + 48);
+	}	
+}
+
 bool	possible_tomove(t_data *info)
 {
 	if (info->map[info->new_pos.y][info->new_pos.x] == '1')
@@ -14,10 +48,11 @@ bool	possible_tomove(t_data *info)
 		if (!info->collectibles)
 		{
 			write(1, "WINNER WINNER CHICKEN DINNER!\n", 30);
-			free(info->map);
+			ft_free(info->map);
+			free(info);
 			exit(0);
 		}
-		return false;
+		return (false);
 	}
 	return (true);
 }
@@ -25,12 +60,14 @@ bool	possible_tomove(t_data *info)
 int	key_hook(int keycode, t_data *info)
 {
 	bool	flag;
+
 	info->new_pos.y = info->p.y;
 	info->new_pos.x = info->p.x;
 	if (keycode == 53)
 	{
 		mlx_destroy_window(info->mlx_ptr, info->mlx_wind);
-		free(info->map);
+		ft_free(info->map);
+		free(info);
 		exit(0);
 	}
 	flag = true;
@@ -42,8 +79,7 @@ int	key_hook(int keycode, t_data *info)
 		flag *= move_left(info);
 	else if (keycode == 2)
 		flag *= move_right(info);
-	if (!flag)
-		return 0;
-	move_player(info);
-	return 0;
+	if ((keycode == 13 || keycode == 1 || keycode == 0 || keycode == 2) && flag)
+		move_player(info);
+	return (0);
 }

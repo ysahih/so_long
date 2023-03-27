@@ -2,15 +2,26 @@
 
 int	calculate_size(char *file)
 {
-	int	i;
-	int	fd;
+	int		i;
+	int		fd;
+	char	*s;
 
 	fd = open(file,O_RDONLY);
-	if (fd == -1 )
-		return (0);
+	if (fd == -1)
+	{
+		perror("Error");
+		exit(1);
+	}
 	i = 0;
-	while((gnl(fd)) != NULL)
+	while(true)
+	{
+		s = NULL;
+		s = gnl(fd);
+		if (s == NULL)
+			break;
+		free(s);
 		i++;
+	}
 	close(fd);
 	return (i);
 }
@@ -24,9 +35,8 @@ t_point	find_player(char **map)
 		p.x = 0;
 		while(map[p.y][p.x])
 		{
-			if (map[p.y][p.x] == 'P'){
+			if (map[p.y][p.x] == 'P')
 				return (p);
-			}
 			p.x++;
 		}
 		p.y++;
@@ -34,37 +44,49 @@ t_point	find_player(char **map)
 	return(p);
 }
 
-char	**read_map(int *row)
+char **get_map(char **map, int fd)
 {
-	int	i;
-	int	size;
-	int	fd;
+	int		i;
+	char	*l;
 
 	i = 0;
-	size = calculate_size("maps/map.ber");
-	if (!size)
-	{
-		write(1, "Invalid Map\n", 12);
-		exit(0);
-	}
-	char **map = malloc(size * sizeof(char *) + 1);
-	if (!map)
-		return (0);
-	map[size] = NULL;
-	fd = open("maps/map.ber",O_RDONLY);
-	if (fd == -1 )
-		return (0);
 	while(true)
 	{
-		char* l = 0;
+		l = 0;
 		l = gnl(fd);
 		if (l == NULL)
 			break;
 		map[i] = l;
 		i++;
 	}
-	*row = i;
-	return(map);
+	return (map);
+}
+
+char	**read_map(char *s, int *row)
+{
+	int		fd;
+	int		size;
+	char	**map;
+
+	size = calculate_size(s);
+	if (!size)
+	{
+		write(1, "Invalid Map\n", 12);
+		exit (1);
+	}
+	map = malloc((size * sizeof(char *)) + 1);
+	if (!map)
+		return (0);
+	map[size] = NULL;
+	fd = open(s,O_RDONLY);
+	if (fd == -1)
+	{
+		free(map);
+		perror("Error");
+		exit(1);
+	}
+	*row = size;
+	return(get_map(map, fd));
 }
 
 int	count_items(char **s)
@@ -72,7 +94,7 @@ int	count_items(char **s)
 	int	i;
 	int	j;
 	int	count;
-	
+
 	i = 0;
 	count = 0;
 	while (s[i])
@@ -82,8 +104,6 @@ int	count_items(char **s)
 		{
 			if  ((s[i][j] == 'E') || (s[i][j] == 'C'))
 				count++;
-			if (s[i][j] == '\n')
-				return(0);
 			j++;
 		}
 		i++;

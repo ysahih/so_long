@@ -10,11 +10,39 @@ size_t ft_strlen(char *s)
 	return (i);
 }
 
+char	*get_ret(char *s, char c)
+{
+	int		i;
+	char	*ret;
+	int		j;
+
+	i = 0;
+	j = -1;
+	while (s[i])
+		i++;
+	if (c == '\n')
+	{
+		ret = malloc(i + 1);
+		while (s[++j])
+			ret[j] = s[j];
+		ret[j] = 0;
+		free(s);
+		return ret;
+	}
+	else 
+	{
+		ret = malloc (i + 2);
+		while (s[++j])
+			ret[j] = s[j];
+		ret[i++] = c;
+		ret[i] = 0;
+	}
+	free(s);
+	return (ret);
+}
+
 char	*join(char *s, char c)
 {
-	char	*ret;
-	int i;
-
 	if (!s)
 	{
 		s = malloc(2);
@@ -26,34 +54,11 @@ char	*join(char *s, char c)
 			free(s);
 			exit (0);
 		}
-		*s = c;
-		s[1] = 0;
+		s[0] = c;
+		s[1] = 0x0;
 		return (s);
 	}
-	i= 0;
-	while(s[i])
-		i++;
-	ret = malloc(i + 2);
-	if(!ret)
-		return (0);
-	i = 0;
-	while (s[i])
-	{
-		ret[i] = s[i];
-		i++;
-	}
-	if (c == '\n')
-	{
-		ret[i] = 0;
-		free(s);
-		return ret;
-	}
-	else { 
-		ret[i++] = c;
-		ret[i] = 0;
-	}
-	free(s);
-	return ret;
+	return (get_ret(s, c));
 }
 
 char	*gnl(int fd)

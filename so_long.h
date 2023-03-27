@@ -22,6 +22,8 @@ typedef struct s_count
 typedef struct s_point {
 	int x;
 	int y;
+	int	row;
+	int	col;
 }t_point;
 
 typedef struct s_data
@@ -58,13 +60,15 @@ bool	move_left(t_data *info);
 bool	move_up(t_data *info);
 bool	move_down(t_data *info);
 bool 	possible_tomove(t_data *info);
+void	ft_putnbr(int n);
 
 
 //rendring
 void	put_image_to_window(t_data *info, int row, int col);
 void	rendering(t_data *info);
 
-
+//utils 
+void	ft_free(char **s);
 
 
 //map checker
@@ -77,7 +81,7 @@ bool found_elmnt(char c);
 int	count_c(char **map);
 int calculate_size(char *file);
 t_point find_player(char **map);
-char** read_map(int *row);
+char** read_map(char *s, int *row);
 int count_items(char **s);
 
 //path finding 

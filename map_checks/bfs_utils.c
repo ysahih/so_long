@@ -26,7 +26,9 @@ void	ft_lstadd_back(t_queue **lst, t_queue *new)
 
 void	enqueue(t_queue **lst, t_point p)
 {
-	t_queue *list = malloc(sizeof(t_queue));
+	t_queue	*list;
+
+	list = malloc(sizeof(t_queue));
 	if(!list)
 		return ; 
 	list->x = p.x;

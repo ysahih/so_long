@@ -1,7 +1,8 @@
 NAME = so_long
 SRCS = so_long.c \
-map_checks/map_utils.c map_checks/map_info.c map_checks/bfs.c map_checks/bfs_utils.c \
-utils/gnl.c utils/mlx_utils.c game_logic/move.c game_logic/move_utils.c\
+map_checks/map_utils.c map_checks/map_info.c map_checks/bfs.c map_checks/bfs_utils1.c map_checks/bfs_utils2.c map_checks/other_utils.c\
+utils/gnl.c utils/mlx_utils.c utils/utils.c \
+game_logic/move.c game_logic/move_utils.c \
 
 OBJS = $(SRCS:%.c=%.o)
 CFLAGS = -Wall -Wextra -Werror

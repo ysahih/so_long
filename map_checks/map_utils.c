@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/27 17:30:55 by ysahih            #+#    #+#             */
+/*   Updated: 2023/03/27 17:34:10 by ysahih           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 int	count_c(char **map)
@@ -20,17 +32,16 @@ int	count_c(char **map)
 		i++;
 	}
 	return (count);
-} 
+}
+
 bool	map_requesties(char **map)
 {
-	int i;
-	int j;
-	t_count c;
+	int		i;
+	int		j;
+	t_count	c;
 
 	i = 0;
-	c.c = 0;
-	c.p = 0;
-	c.e = 0;
+	c = init_c();
 	while (map[i])
 	{
 		j = 0;
@@ -46,22 +57,22 @@ bool	map_requesties(char **map)
 		}
 		i++;
 	}
-	if (c.e != 1 || c.p != 1)
-		return (false);
-	else if (c.c == 0)
-		return (false);
-	return (true);
+	return (check_and_return(c));
 }
 
 bool	components(char **map)
 {
-	int	i = 0, j = 0;
-	while(map[i])
+	int	i;
+	int	j;
+
+	i = 0;
+	while (map[i])
 	{
 		j = 0;
-		while(map[i][j])
+		while (map[i][j])
 		{
-			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'E' && map[i][j] != 'P' && map[i][j] != 'C')
+			if (map[i][j] != '1' && map[i][j] != '0' && map[i][j] != 'E' &&
+			map[i][j] != 'P' && map[i][j] != 'C')
 				return (false);
 			j++;
 		}
@@ -70,27 +81,27 @@ bool	components(char **map)
 	return (true);
 }
 
-bool rectangular(char **map, int a)
+bool	rectangular(char **map, int a)
 {
 	int	i;
 	int	j;
 
 	i = 0;
 	j = ft_strlen(map[0]);
-	while (i < a )
+	while (i < a)
 	{
-		if ((size_t)j != ft_strlen(map[i + 1]))
+		if (j != ft_strlen(map[i + 1]))
 			return (false);
 		i++;
 	}
-	if ((int)j - 1 == a)
+	if (j - 1 == a)
 		return (false);
 	return (true);
 }
 
-bool walls_serounded(char **map, int a)
+bool	walls_serounded(char **map, int a)
 {
-	size_t	i;
+	int	i;
 	int	j;
 
 	i = 0;
@@ -102,7 +113,7 @@ bool walls_serounded(char **map, int a)
 	}
 	i = 0;
 	j = ft_strlen(map[0]) - 1;
-	while  ((int)i <= a)
+	while (i <= a)
 	{
 		if (map[i][0] != '1' && map[i][j] != '1')
 			return (false);

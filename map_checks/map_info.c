@@ -1,39 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_info.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/27 17:18:25 by ysahih            #+#    #+#             */
+/*   Updated: 2023/03/27 17:18:26 by ysahih           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
-
-int	calculate_size(char *file)
-{
-	int		i;
-	int		fd;
-	char	*s;
-
-	fd = open(file,O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error");
-		exit(1);
-	}
-	i = 0;
-	while(true)
-	{
-		s = NULL;
-		s = gnl(fd);
-		if (s == NULL)
-			break;
-		free(s);
-		i++;
-	}
-	close(fd);
-	return (i);
-}
 
 t_point	find_player(char **map)
 {
 	t_point	p;
+
 	p.y = 0;
 	while (map[p.y])
 	{
 		p.x = 0;
-		while(map[p.y][p.x])
+		while (map[p.y][p.x])
 		{
 			if (map[p.y][p.x] == 'P')
 				return (p);
@@ -41,21 +28,21 @@ t_point	find_player(char **map)
 		}
 		p.y++;
 	}
-	return(p);
+	return (p);
 }
 
-char **get_map(char **map, int fd)
+char	**get_map(char **map, int fd)
 {
 	int		i;
 	char	*l;
 
 	i = 0;
-	while(true)
+	while (true)
 	{
 		l = 0;
 		l = gnl(fd);
 		if (l == NULL)
-			break;
+			break ;
 		map[i] = l;
 		i++;
 	}
@@ -71,22 +58,21 @@ char	**read_map(char *s, int *row)
 	size = calculate_size(s);
 	if (!size)
 	{
-		write(1, "Invalid Map\n", 12);
+		write (1, "Invalid Map\n", 12);
 		exit (1);
 	}
 	map = malloc((size * sizeof(char *)) + 1);
 	if (!map)
 		return (0);
 	map[size] = NULL;
-	fd = open(s,O_RDONLY);
+	fd = open (s, O_RDONLY);
 	if (fd == -1)
 	{
-		free(map);
-		perror("Error");
-		exit(1);
+		perror ("Error");
+		exit (0);
 	}
 	*row = size;
-	return(get_map(map, fd));
+	return (get_map (map, fd));
 }
 
 int	count_items(char **s)
@@ -102,7 +88,7 @@ int	count_items(char **s)
 		j = 0;
 		while (s[i][j])
 		{
-			if  ((s[i][j] == 'E') || (s[i][j] == 'C'))
+			if ((s[i][j] == 'E') || (s[i][j] == 'C'))
 				count++;
 			j++;
 		}

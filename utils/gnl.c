@@ -1,16 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   gnl.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/27 17:44:07 by ysahih            #+#    #+#             */
+/*   Updated: 2023/03/27 17:44:24 by ysahih           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
-size_t ft_strlen(char *s)
+char	*get_ret(char *s)
 {
-    size_t  i;
+	int		i;
+	int		j;
+	char	*ret;
 
-    i = 0;
-	while(s[i])
+	i = 0;
+	j = -1;
+	while (s[i])
 		i++;
-	return (i);
+	ret = malloc(i + 1);
+	while (s[++j])
+		ret[j] = s[j];
+	ret[j] = 0;
+	free(s);
+	return (ret);
 }
 
-char	*get_ret(char *s, char c)
+char	*new_str(char *s, char c)
 {
 	int		i;
 	char	*ret;
@@ -21,15 +41,8 @@ char	*get_ret(char *s, char c)
 	while (s[i])
 		i++;
 	if (c == '\n')
-	{
-		ret = malloc(i + 1);
-		while (s[++j])
-			ret[j] = s[j];
-		ret[j] = 0;
-		free(s);
-		return ret;
-	}
-	else 
+		return (get_ret(s));
+	else
 	{
 		ret = malloc (i + 2);
 		while (s[++j])
@@ -37,7 +50,7 @@ char	*get_ret(char *s, char c)
 		ret[i++] = c;
 		ret[i] = 0;
 	}
-	free(s);
+	free (s);
 	return (ret);
 }
 
@@ -51,48 +64,45 @@ char	*join(char *s, char c)
 		if (c == '\n')
 		{
 			write(1, "Invalid Map\n", 12);
-			free(s);
 			exit (0);
 		}
 		s[0] = c;
 		s[1] = 0x0;
 		return (s);
 	}
-	return (get_ret(s, c));
+	return (new_str(s, c));
+}
+
+char	init_vars(char **buff, char r)
+{
+	*buff = join(*buff, r);
+	return (r);
 }
 
 char	*gnl(int fd)
 {
 	char		r;
-	int			ret;
+	int			i;
 	char		*buff;
 	static char	previous;
 
-	ret = 1;
 	buff = 0;
 	while (1)
 	{
-		ret = read(fd, &r, 1);
-		if (ret == -1)
-			return 0;
-		else if (ret == 0)
+		i = read(fd, &r, 1);
+		if (i == -1)
+			return (0);
+		else if (i == 0)
 		{
 			if (previous == '\n')
-			{
-				write(1, "Invalid Map\n", 12);
-				exit(0);
-			}
-		break;
+				ft_exit();
+			break ;
 		}
-		buff = join(buff, r);
-		previous = r;
+		previous = init_vars (&buff, r);
 		if (r == '\n')
-			break;
+			break ;
 	}
 	if (!buff || *buff == '\0')
-	{
-		free(buff);
-		return 0;
-	}
-	return buff;
+		return (0);
+	return (buff);
 }

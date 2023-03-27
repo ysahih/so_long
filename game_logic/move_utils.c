@@ -1,14 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/27 17:05:41 by ysahih            #+#    #+#             */
+/*   Updated: 2023/03/27 17:06:03 by ysahih           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
-
-void ft_free(char **s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		free(s[i++]);
-	free(s);
-}
 
 void	ft_putchar(char c)
 {
@@ -48,8 +50,6 @@ bool	possible_tomove(t_data *info)
 		if (!info->collectibles)
 		{
 			write(1, "WINNER WINNER CHICKEN DINNER!\n", 30);
-			ft_free(info->map);
-			free(info);
 			exit(0);
 		}
 		return (false);
@@ -66,8 +66,6 @@ int	key_hook(int keycode, t_data *info)
 	if (keycode == 53)
 	{
 		mlx_destroy_window(info->mlx_ptr, info->mlx_wind);
-		ft_free(info->map);
-		free(info);
 		exit(0);
 	}
 	flag = true;

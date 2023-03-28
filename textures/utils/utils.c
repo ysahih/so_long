@@ -6,11 +6,11 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:46:50 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:55:31 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/27 18:11:57 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 void	ft_free(char **s)
 {

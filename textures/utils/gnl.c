@@ -6,11 +6,11 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:44:07 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:44:24 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/27 18:11:50 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 char	*get_ret(char *s)
 {

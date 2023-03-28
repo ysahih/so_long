@@ -6,11 +6,11 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:18:25 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:18:26 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/27 18:11:41 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 t_point	find_player(char **map)
 {

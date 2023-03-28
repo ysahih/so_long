@@ -6,7 +6,7 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:53:34 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:53:35 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:55:34 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ void	get_img(t_data *info)
 	int	i;
 
 	info->player_img = mlx_xpm_file_to_image(info->mlx_ptr,
-			"./images/koala11.xpm", &i, &i);
+			"./textures/images/koala11.xpm", &i, &i);
 	info->wall_img = mlx_xpm_file_to_image(info->mlx_ptr,
-			"./images/wall_01.xpm", &i, &i);
+			"./textures/images/wall_01.xpm", &i, &i);
 	info->cll_img = mlx_xpm_file_to_image(info->mlx_ptr,
-			"./images/stra00.xpm", &i, &i);
+			"./textures/images/stra00.xpm", &i, &i);
 	info->exit_img = mlx_xpm_file_to_image(info->mlx_ptr,
-			"./images/door_01.xpm", &i, &i);
+			"./textures/images/door_01.xpm", &i, &i);
 	info->floor_img = mlx_xpm_file_to_image(info->mlx_ptr,
-			"./images/FLOOR.xpm", &i, &i);
+			"./textures/images/FLOOR.xpm", &i, &i);
 	if (!info->player_img || !info->wall_img || !info->cll_img
 		|| !info->exit_img || !info->floor_img)
 	{

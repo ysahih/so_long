@@ -6,11 +6,11 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:10:51 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:10:52 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/27 18:11:38 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 void	push(int y, int x, t_queue **queue, char **visited)
 {

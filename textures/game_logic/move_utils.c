@@ -6,11 +6,11 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:05:41 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:06:03 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/27 18:11:02 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 void	ft_putchar(char c)
 {

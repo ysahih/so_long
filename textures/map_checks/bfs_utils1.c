@@ -6,11 +6,11 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:12:48 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:12:49 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/28 17:55:51 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 t_queue	*ft_lstlast(t_queue *lst)
 {

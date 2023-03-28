@@ -6,11 +6,11 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:34:33 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:34:34 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/27 18:11:46 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 t_count	init_c(void)
 {

@@ -6,11 +6,11 @@
 /*   By: ysahih <ysahih@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:30:55 by ysahih            #+#    #+#             */
-/*   Updated: 2023/03/27 17:34:10 by ysahih           ###   ########.fr       */
+/*   Updated: 2023/03/27 22:24:48 by ysahih           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../so_long.h"
+#include "../../so_long.h"
 
 int	count_c(char **map)
 {
@@ -115,7 +115,7 @@ bool	walls_serounded(char **map, int a)
 	j = ft_strlen(map[0]) - 1;
 	while (i <= a)
 	{
-		if (map[i][0] != '1' && map[i][j] != '1')
+		if (map[i][0] != '1' || map[i][j] != '1')
 			return (false);
 		i++;
 	}
